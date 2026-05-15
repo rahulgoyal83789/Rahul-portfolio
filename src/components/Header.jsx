@@ -66,7 +66,7 @@ const Header = () => {
                   delay: 1.3,
                   duration: 0.8,
                 }}
-                className='text-gray-700 dark:text-gray-700 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
+                className='text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
                 href="https://github.com/rahulgoyal83789">
                 <FiGithub className='w-5 h-5'/>
               </motion.a>
@@ -78,7 +78,7 @@ const Header = () => {
                   delay: 1.3,
                   duration: 0.8,
                 }}
-                className='text-gray-700 dark:text-gray-700 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
+                className='text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
                 href="https://x.com/rahulgoyal83789">
                 <BsTwitterX className='w-5 h-5'/>
               </motion.a>
@@ -89,7 +89,7 @@ const Header = () => {
                   delay: 1.3,
                   duration: 0.8,
                 }}
-                className='text-gray-700 dark:text-gray-700 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
+                className='text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
                 href="https://linkedin.com/in/rahulgoyal83789">
                 <FiLinkedin className='w-5 h-5'/>
               </motion.a>

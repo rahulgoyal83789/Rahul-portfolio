@@ -1,11 +1,127 @@
 @import "tailwindcss";
-body{
-    overflow-x: hidden;
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    position: relative;
-    background-color: black;
-    color: white;
+
+@theme {
+  /* Custom Colors */
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-purple-200: #E9D5FF;
+  --color-purple-600: #9333EA;
+  --color-purple-900: #581C87;
+}
+
+html {
+  scroll-behavior: smooth;
+  cursor: none; /* Hide default cursor */
+}
+
+body {
+  overflow-x: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  cursor: none; /* Hide default cursor */
+  position: relative;
+  background-color: black;
+  color: white;
+}
+
+/* Hide default cursor on interactive elements */
+a,
+button,
+input,
+textarea,
+select {
+  cursor: none;
+}
+
+/* Section styling */
+section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+
+.panel {
+  width: 100%;
+  height: 100vh;
+}
+
+.pin-spacer {
+  height: 200vh;
+}
+
+
+/* Show default cursor on mobile */
+@media (max-width: 768px) {
+  html,
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    cursor: auto;
+  }
+}
+
+/* Responsive text sizing */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 2.5rem !important;
+  }
+
+  h2 {
+    font-size: 2rem !important;
+  }
+
+  p {
+    font-size: 1rem !important;
+  }
+
+  .panel-title {
+    font-size: 2rem !important;
+  }
+
+  .panel-desc {
+    font-size: 1rem !important;
+  }
+}
+
+
+
+@layer base {
+  * {
+    @apply border-border ;
+  }
+  body {
+    @apply bg-background text-foreground ;
+  }
 }
