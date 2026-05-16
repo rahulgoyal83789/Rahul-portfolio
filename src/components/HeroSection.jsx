@@ -31,7 +31,7 @@ const HeroSection = () => {
           delay: 1.3,
           duration: 1.5
         }}
-        className="text-5xl md:text-7xl lg:text-8xl font-bold z-10 mb-6">Building Fast <br /> Reliable Results</motion.h1>
+        className="text-4xl md:text-6xl lg:text-7xl font-bold z-10 mb-6">Building Real Things <br />That Matter</motion.h1>
         <motion.p 
         initial={{opacity: 0,y: 80}}
         animate={{opacity: 1,y: 0}}
@@ -43,10 +43,7 @@ const HeroSection = () => {
           duration: 1.5
         }}
         className="text-xl md:text-1xl lg:text-2xl text-purple-200 max-w-2xl">
-          I'm Rahul, a 2nd year CS student at BVP Delhi who builds
-          full-stack web apps that actually ship. From AI-powered career tools
-          to real-time collaborative editors, I turn ideas into deployed
-          products.
+          2nd year CSE student turning ideas into deployed products — AI integrations, real-time systems, and production-ready backends.
         </motion.p>
       </div>
 
