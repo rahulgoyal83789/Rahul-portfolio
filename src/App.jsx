@@ -7,7 +7,8 @@ import CustomCursor from "./components/CustomCursor"
 import AboutSection from "./components/AboutSection"
 import ProjectSection from "./components/ProjectSection"
 import ContactSection from "./components/ContactSection"
-
+import Footer from "./components/Footer"
+import ProgressBar from "./components/ProgressBar"
 function App() {
   useEffect(()=>{
     //Register ScrollTrigger plugin
@@ -28,6 +29,8 @@ function App() {
       <AboutSection />
       <ProjectSection />
       <ContactSection />
+      <Footer />
+      <ProgressBar />
     </>
   )
 }
