@@ -6,7 +6,7 @@ const HeroSection = () => {
     <section className="h-screen bg-gradient-to-b from-violet-900 to-black relative overflow-hidden flex items-center">
 
       {/* Left Section — always visible, positioned from left */}
-      <div className="relative z-40 lg:px-24 md:px-16 px-8 max-w-2xl">
+      <div className="relative z-40 lg:px-24 md:px-16 px-8">
         <motion.p
           initial={{opacity: 0, y: 80}}
           animate={{opacity: 1, y: 0}}
@@ -20,7 +20,7 @@ const HeroSection = () => {
           initial={{opacity: 0, y: 80}}
           animate={{opacity: 1, y: 0}}
           transition={{ type: "spring", stiffness: 40, damping: 25, delay: 1.3, duration: 1.5 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold z-10 mb-6 leading-tight"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold z-10 mb-6 leading-tight"
         >
           Building Real Things <br />That Matter
         </motion.h1>
