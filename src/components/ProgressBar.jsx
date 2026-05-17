@@ -39,7 +39,7 @@ const ProgressBar = () => {
                 }
             });
         }
-    })
+    },[])
   return (
     <div ref={progressBarRef} className="fixed top-0 left-0 w-full h-[5px] bg-gray-800 z-50">
         <div 

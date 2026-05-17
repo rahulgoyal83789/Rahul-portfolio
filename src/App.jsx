@@ -1,4 +1,4 @@
-import { use, useEffect, useRef } from "react"
+import { useEffect } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Header from "./components/Header"
@@ -24,11 +24,19 @@ function App() {
   return (
     <>
       <Header />
-      <HeroSection />
+      <div id="home">
+        <HeroSection />
+      </div>
       <CustomCursor />
-      <AboutSection />
-      <ProjectSection />
-      <ContactSection />
+      <div id="about">
+        <AboutSection />
+      </div>
+      <div id="projects">
+        <ProjectSection />
+      </div>
+      <div id="contact">
+        <ContactSection />
+      </div>
       <Footer />
       <ProgressBar />
     </>

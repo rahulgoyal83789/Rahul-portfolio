@@ -1,21 +1,51 @@
 import {motion , AnimatePresence} from 'framer-motion';
-import { FiGithub , FiLinkedin , FiMenu , FiX } from 'react-icons/fi';
+import { FiGithub , FiLinkedin , FiMenu , FiX , FiInstagram } from 'react-icons/fi';
 import { BsTwitterX } from "react-icons/bs";
 import { useState } from 'react';
+
+
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mqejzljq";
+
 const Header = () => {
-  //Toggle the menu open/close state
   const [isopen, setIsOpen] = useState(false);
-  const toggleMenu = () => {
-    setIsOpen(!isopen);
-  }
-  //state to track if contact form is open
+  const toggleMenu = () => setIsOpen(!isopen);
+
   const [contactFormOpen, setContactFormOpen] = useState(false);
-  const openContactForm = () => {
-    setContactFormOpen(true);
-  }
+  const openContactForm  = () => setContactFormOpen(true);
   const closeContactForm = () => {
     setContactFormOpen(false);
-  }
+    setFormStatus("idle");
+    setFormData({ name: "", email: "", message: "" });
+  };
+
+  // Form field state
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  // idle | sending | success | error
+  const [formStatus, setFormStatus] = useState("idle");
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormStatus("sending");
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setFormStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setFormStatus("error");
+      }
+    } catch {
+      setFormStatus("error");
+    }
+  };
   return (
     <header className="absolute w-full z-50 transition-all duration-300">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-20">
@@ -32,12 +62,17 @@ const Header = () => {
             }}
              className="flex items-center">
                 <div className="h-10 w-10 rounded-xl bg-gradient-to-r from-gray-500 to-gray-100 flex items-center justify-center text-purple-600 font-bold text-xl mr-3">R</div>
-                <span className="text-xl font-bold bg-gradient-to-r from-gray-300 to-gray-100 bg-clip-text text-transparent">_rahul.devlogs</span>
+                <span className="text-xl font-bold bg-gradient-to-r from-gray-300 to-gray-100 bg-clip-text text-transparent">Rahul</span>
             </motion.div>
 
             {/*desktop Navigation*/}
             <nav className="lg:flex hidden space-x-8">
-              {["Home", "About", "Projects", "Experience" , "Contact"].map((item, index) => (
+              {[
+                { label: "Home",     href: "#home"     },
+                { label: "About",    href: "#about"    },
+                { label: "Projects", href: "#projects" },
+                { label: "Contact",  href: "#contact"  },
+              ].map(({ label, href }, index) => (
                 <motion.a
                 initial = {{ opacity: 0, y: -20 }}
                 animate = {{ opacity: 1, y: 0 }}
@@ -47,10 +82,10 @@ const Header = () => {
                   damping: 20,
                   delay: 0.7 + index * 0.2,
                 }}
-                key={item}
-                className="relative text-gray-800 dark:text-gray-200 hover:violet-600 dark:hover:text-violet-400 font-medium transition-colors duration-300 group"
-                href='#'>
-                  {item}
+                key={label}
+                className="relative text-gray-800 dark:text-gray-200 hover:text-violet-400 dark:hover:text-violet-400 font-medium transition-colors duration-300 group"
+                href={href}>
+                  {label}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-violet-600 group-hover:w-full transition-all duration-300"></span>
                 </motion.a>
               ))}
@@ -67,8 +102,8 @@ const Header = () => {
                   duration: 0.8,
                 }}
                 className='text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
-                href="https://github.com/rahulgoyal83789">
-                <FiGithub className='w-5 h-5'/>
+                href="https://linkedin.com/in/rahulgoyal83789">
+                <FiLinkedin className='w-5 h-5'/>
               </motion.a>
 
               <motion.a
@@ -79,8 +114,8 @@ const Header = () => {
                   duration: 0.8,
                 }}
                 className='text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
-                href="https://x.com/rahulgoyal83789">
-                <BsTwitterX className='w-5 h-5'/>
+                href="https://github.com/rahulgoyal83789">
+                <FiGithub className='w-5 h-5'/>
               </motion.a>
               <motion.a
                 initial = {{ opacity: 0, scale: 0.5 }}
@@ -90,8 +125,19 @@ const Header = () => {
                   duration: 0.8,
                 }}
                 className='text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
-                href="https://linkedin.com/in/rahulgoyal83789">
-                <FiLinkedin className='w-5 h-5'/>
+                href="https://instagram.com/rahulgoyal83789">
+                <FiInstagram className='w-5 h-5'/>
+              </motion.a>
+              <motion.a
+                initial = {{ opacity: 0, scale: 0.5 }}
+                animate = {{ opacity: 1, scale: 1 }}
+                transition={{
+                  delay: 1.3,
+                  duration: 0.8,
+                }}
+                className='text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
+                href="https://x.com/rahulgoyal83789">
+                <BsTwitterX className='w-5 h-5'/>
               </motion.a>
               {/* Hire Me Button */}
               <motion.button
@@ -128,22 +174,30 @@ const Header = () => {
         transition={{duration:0.5}}
         className="md:hidden overflow-hidden bg-white dark:bg-gray-900 shadow-lg px-4 py-5 space-y-5">
           <nav className="flex flex-col space-y-3">
-          {["Home", "About", "Projects", "Experience" , "Contact"].map((item, index) =>(
-            <a onClick={toggleMenu} className="text-gray-300 font-medium py-2" key={item} href='#'>
-              {item}
+          {[
+            { label: "Home",     href: "#home"     },
+            { label: "About",    href: "#about"    },
+            { label: "Projects", href: "#projects" },
+            { label: "Contact",  href: "#contact"  },
+          ].map(({ label, href }) =>(
+            <a onClick={toggleMenu} className="text-gray-300 font-medium py-2" key={label} href={href}>
+              {label}
             </a>
           ))}
           </nav>
           <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
             <div className="flex space-x-5">
+              <a href="https://linkedin.com/in/rahulgoyal83789">
+                <FiLinkedin className='w-5 h-5 text-gray-300'/>
+              </a>
               <a href="https://github.com/rahulgoyal83789">
                 <FiGithub className='w-5 h-5 text-gray-300'/>
               </a>
+              <a href="https://instagram.com/rahulgoyal83789">
+                <FiInstagram className='w-5 h-5 text-gray-300'/>
+              </a>
               <a href="https://x.com/rahulgoyal83789">
                 <BsTwitterX className='w-5 h-5 text-gray-300'/>
-              </a>
-              <a href="https://linkedin.com/in/rahulgoyal83789">
-                <FiLinkedin className='w-5 h-5 text-gray-300'/>
               </a>
             </div>
             <button 
@@ -154,7 +208,7 @@ const Header = () => {
           </div>
         </motion.div>
 
-        {/* Contact Form */}
+        {/* Contact Form Modal */}
         <AnimatePresence>
         {contactFormOpen && (
           <motion.div
@@ -162,9 +216,10 @@ const Header = () => {
           animate={{opacity:1}}
           exit={{opacity:0}}
           transition={{duration:0.5}}
-          className='fixed inset-0 bg-black/50 background-blur-sm z-50 flex items-center justify-center p-4'
+          className='fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4'
+          onClick={(e) => { if (e.target === e.currentTarget) closeContactForm(); }}
           >
-            <motion.div 
+            <motion.div
             initial={{scale:0.8, opacity:0 , y:30}}
             animate={{scale:1, opacity:1 , y:0}}
             exit={{scale:0.8, opacity:0 , y:30}}
@@ -177,28 +232,78 @@ const Header = () => {
             className='bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-md p-6'>
               <div className='flex justify-between items-center mb-4'>
                 <h1 className='text-2xl font-bold text-gray-300'>Get In Touch</h1>
-                <button onClick={closeContactForm}><FiX className='w-5 h-5 text-gray-300 font-extrabold'/></button>
+                <button onClick={closeContactForm} aria-label="Close contact form">
+                  <FiX className='w-5 h-5 text-gray-300'/>
+                </button>
               </div>
-              {/* Input Forms */}
-              <form className='space-y-4'>
-                <div>
-                  <label htmlFor="name" className='block text-sm font-medium text-gray-300 mb-1'>Name</label>
-                  <input type="text" id="name" className='w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700' placeholder='Your Name'/>
+
+              {/* Success state */}
+              {formStatus === "success" ? (
+                <div className='py-8 text-center'>
+                  <p className='text-2xl mb-2'>🎉</p>
+                  <p className='text-gray-300 font-semibold text-lg'>Message sent!</p>
+                  <p className='text-gray-400 text-sm mt-1'>I'll get back to you as soon as possible.</p>
+                  <button
+                    onClick={closeContactForm}
+                    className='mt-6 px-6 py-2 rounded-lg bg-violet-600 text-white hover:bg-violet-700 transition-colors duration-300'>
+                    Close
+                  </button>
                 </div>
-                <div>
-                  <label htmlFor="email" className='block text-sm font-medium text-gray-300 mb-1'>Email</label>
-                  <input type="email" id="email" className='w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700' placeholder='Your Email'/>
-                </div>
-                <div>
-                  <label htmlFor="message" className='block text-sm font-medium text-gray-300 mb-1'>Message</label>
-                  <textarea id="message" className='w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700' placeholder='How can we help you?' rows="4"/>
-                </div>
-                <motion.button 
-                type='submit'
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className='w-full px-4 py-2 bg-gradient-to-r from-violet-600 to-violet-400 hover:from-violet-700 hover:to-purple-700 transition-all duration-300 rounded-lg shadow-md hover:shadow-lg hover:shadow-violet-600/50 '>Send Message</motion.button>
-              </form>
+              ) : (
+                <form className='space-y-4' onSubmit={handleSubmit} noValidate>
+                  <div>
+                    <label htmlFor="name" className='block text-sm font-medium text-gray-300 mb-1'>Name</label>
+                    <input
+                      type="text"
+                      id="name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      className='w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700 text-white placeholder-gray-400'
+                      placeholder='Your Name'
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className='block text-sm font-medium text-gray-300 mb-1'>Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      className='w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700 text-white placeholder-gray-400'
+                      placeholder='your@email.com'
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="message" className='block text-sm font-medium text-gray-300 mb-1'>Message</label>
+                    <textarea
+                      id="message"
+                      required
+                      value={formData.message}
+                      onChange={handleChange}
+                      className='w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700 text-white placeholder-gray-400'
+                      placeholder='What would you like to discuss?'
+                      rows="4"
+                    />
+                  </div>
+
+                  {formStatus === "error" && (
+                    <p className='text-red-400 text-sm'>
+                      Something went wrong. Please try again or email me directly.
+                    </p>
+                  )}
+
+                  <motion.button
+                    type='submit'
+                    disabled={formStatus === "sending"}
+                    whileHover={{ scale: formStatus === "sending" ? 1 : 1.03 }}
+                    whileTap={{ scale: formStatus === "sending" ? 1 : 0.97 }}
+                    className='w-full px-4 py-2 bg-gradient-to-r from-violet-600 to-violet-400 hover:from-violet-700 hover:to-purple-700 transition-all duration-300 rounded-lg shadow-md hover:shadow-lg hover:shadow-violet-600/50 disabled:opacity-60 disabled:cursor-not-allowed'>
+                    {formStatus === "sending" ? "Sending…" : "Send Message"}
+                  </motion.button>
+                </form>
+              )}
             </motion.div>
           </motion.div>
         )}

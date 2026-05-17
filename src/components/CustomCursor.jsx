@@ -4,47 +4,60 @@ import { gsap } from "gsap";
 const CustomCursor = () => {
     const cursorRef = useRef(null);
     const cursorBorderRef = useRef(null);
-    //Hide cursor on mobile 
-    const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches
-    if (isMobile){
-        return null
-    }
+
+    // Computed before any hook so the value is stable across renders.
+    // The early return comes AFTER all hooks — Rules of Hooks requires
+    // hooks to be called unconditionally on every render.
+    const isMobile =
+        typeof window !== "undefined" &&
+        window.matchMedia("(max-width: 768px)").matches;
+
     useEffect(() => {
-        // Get cursor elements
-        const cursor = cursorRef. current
-        const cursorBorder = cursorBorderRef.current
-        // initial position off-screen
-        gsap.set([cursor, cursorBorder], { xPercent: -50, yPercent: -50})
-        // Variables for cursor position with different speeds
-        const xTo = gsap.quickTo(cursor, "x", { duration: 0.2, ease: "power3.out" })
-        const yTo = gsap. quickTo( cursor, "y", { duration: 0.2, ease: "power3.out" })
-        const xToBorder = gsap.quickTo(cursorBorder, "x", { duration: 0.5, ease: "power.out" })
-        const yToBorder = gsap.quickTo(cursorBorder, "y", {duration: 0.5, ease: "power3.out" })
-        //mose move handler
-        const handleMouseMove = (e) =>{
-            xTo(e.clientX)
-            yTo(e.clientY)
-            xToBorder(e.clientX)
-            yToBorder(e.clientY)
-        }
+        // Skip cursor setup on mobile — elements won't be mounted anyway
+        if (isMobile) return;
 
-        // Add mouse move Listener
-        window. addEventListener("mousemove",handleMouseMove)
+        const cursor = cursorRef.current;
+        const cursorBorder = cursorBorderRef.current;
+        if (!cursor || !cursorBorder) return;
 
-        // Add click animation
-        document.addEventListener("mousedown", ()=> {
-            gsap.to([cursor, cursorBorder], {
-            scale: 0.6,
-            duration: 0.2,            
-            })
-        })
-        document.addEventListener("mouseup",() => {
-            gsap. to([cursor, cursorBorder],{
-            scale: 1,
-            duration: 0.2,
-            })   
-        })
-    },[])
+        // Start off-screen so they don't flash at (0, 0) on mount
+        gsap.set([cursor, cursorBorder], { xPercent: -50, yPercent: -50 });
+
+        // Dot moves fast; border ring lags slightly for a trailing effect
+        const xTo       = gsap.quickTo(cursor,       "x", { duration: 0.2, ease: "power3.out" });
+        const yTo       = gsap.quickTo(cursor,       "y", { duration: 0.2, ease: "power3.out" });
+        const xToBorder = gsap.quickTo(cursorBorder, "x", { duration: 0.5, ease: "power3.out" });
+        const yToBorder = gsap.quickTo(cursorBorder, "y", { duration: 0.5, ease: "power3.out" });
+
+        const handleMouseMove = (e) => {
+            xTo(e.clientX);
+            yTo(e.clientY);
+            xToBorder(e.clientX);
+            yToBorder(e.clientY);
+        };
+
+        const handleMouseDown = () => {
+            gsap.to([cursor, cursorBorder], { scale: 0.6, duration: 0.2 });
+        };
+
+        const handleMouseUp = () => {
+            gsap.to([cursor, cursorBorder], { scale: 1, duration: 0.2 });
+        };
+
+        window.addEventListener("mousemove", handleMouseMove);
+        document.addEventListener("mousedown", handleMouseDown);
+        document.addEventListener("mouseup", handleMouseUp);
+
+        // Remove listeners on unmount — prevents ghost handlers on hot-reload
+        return () => {
+            window.removeEventListener("mousemove", handleMouseMove);
+            document.removeEventListener("mousedown", handleMouseDown);
+            document.removeEventListener("mouseup", handleMouseUp);
+        };
+    }, [isMobile]);
+
+    // Now safe to return null — all hooks have already been called above
+    if (isMobile) return null;
     return(
         <>
             {/* Main Cursor Dot */}
