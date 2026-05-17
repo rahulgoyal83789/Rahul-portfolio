@@ -31,9 +31,9 @@ const ProjectSection = () => {
         },
         {
             id: 4,
-            title: "WeatherOs - React based basic weather app",
-            imageSrc: "/images/Weatherapp_image.png",
-            link: "https://github.com/rahulgoyal83789/weatheros",
+            title: "CloudJar - React based basic weather app",
+            imageSrc: "/images/CloudJar_image.png",
+            link: "https://cloudjar.vercel.app/",
         },
     ];
 

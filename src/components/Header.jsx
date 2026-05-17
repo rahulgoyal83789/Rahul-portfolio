@@ -6,6 +6,17 @@ import { useState } from 'react';
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mqejzljq";
 
+const scrollToSection = (e, href) => {
+  e.preventDefault();
+  const id = href.replace("#", "");
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth" });
+    // Remove the hash from the URL without adding a history entry
+    history.replaceState(null, "", window.location.pathname);
+  }
+};
+
 const Header = () => {
   const [isopen, setIsOpen] = useState(false);
   const toggleMenu = () => setIsOpen(!isopen);
@@ -84,7 +95,8 @@ const Header = () => {
                 }}
                 key={label}
                 className="relative text-gray-800 dark:text-gray-200 hover:text-violet-400 dark:hover:text-violet-400 font-medium transition-colors duration-300 group"
-                href={href}>
+                href={href}
+                onClick={(e) => scrollToSection(e, href)}>
                   {label}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-violet-600 group-hover:w-full transition-all duration-300"></span>
                 </motion.a>
@@ -180,7 +192,7 @@ const Header = () => {
             { label: "Projects", href: "#projects" },
             { label: "Contact",  href: "#contact"  },
           ].map(({ label, href }) =>(
-            <a onClick={toggleMenu} className="text-gray-300 font-medium py-2" key={label} href={href}>
+            <a onClick={(e) => { scrollToSection(e, href); toggleMenu(); }} className="text-gray-300 font-medium py-2" key={label} href={href}>
               {label}
             </a>
           ))}

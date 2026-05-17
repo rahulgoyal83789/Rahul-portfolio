@@ -11,6 +11,10 @@ import Footer from "./components/Footer"
 import ProgressBar from "./components/ProgressBar"
 function App() {
   useEffect(()=>{
+    // Remove any leftover hash from the URL on load
+    if (window.location.hash) {
+      history.replaceState(null, "", window.location.pathname);
+    }
     //Register ScrollTrigger plugin
     gsap.registerPlugin(ScrollTrigger);
     //Refresh scroll triggers when the page is fully loaded
