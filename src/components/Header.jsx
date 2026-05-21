@@ -94,7 +94,7 @@ const Header = () => {
                   delay: 0.7 + index * 0.2,
                 }}
                 key={label}
-                className="relative text-gray-800 dark:text-gray-200 hover:text-violet-400 dark:hover:text-violet-400 font-medium transition-colors duration-300 group"
+                className="relative text-white dark:text-gray-200 hover:text-violet-400 dark:hover:text-violet-400 font-medium transition-colors duration-300 group"
                 href={href}
                 onClick={(e) => scrollToSection(e, href)}>
                   {label}
@@ -113,7 +113,7 @@ const Header = () => {
                   delay: 1.3,
                   duration: 0.8,
                 }}
-                className='text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
+                className='text-white dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
                 href="https://linkedin.com/in/rahulgoyal83789">
                 <FiLinkedin className='w-5 h-5'/>
               </motion.a>
@@ -125,7 +125,7 @@ const Header = () => {
                   delay: 1.3,
                   duration: 0.8,
                 }}
-                className='text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
+                className='text-white dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
                 href="https://github.com/rahulgoyal83789">
                 <FiGithub className='w-5 h-5'/>
               </motion.a>
@@ -136,7 +136,7 @@ const Header = () => {
                   delay: 1.3,
                   duration: 0.8,
                 }}
-                className='text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
+                className='text-white dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
                 href="https://instagram.com/rahulgoyal83789">
                 <FiInstagram className='w-5 h-5'/>
               </motion.a>
@@ -147,7 +147,7 @@ const Header = () => {
                   delay: 1.3,
                   duration: 0.8,
                 }}
-                className='text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
+                className='text-white dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-300' 
                 href="https://x.com/rahulgoyal83789">
                 <BsTwitterX className='w-5 h-5'/>
               </motion.a>
@@ -192,7 +192,7 @@ const Header = () => {
             { label: "Projects", href: "#projects" },
             { label: "Contact",  href: "#contact"  },
           ].map(({ label, href }) =>(
-            <a onClick={(e) => { scrollToSection(e, href); toggleMenu(); }} className="text-gray-300 font-medium py-2" key={label} href={href}>
+            <a onClick={(e) => { scrollToSection(e, href); toggleMenu(); }} className="text-gray-900 dark:text-gray-300 font-medium py-2" key={label} href={href}>
               {label}
             </a>
           ))}
@@ -200,16 +200,16 @@ const Header = () => {
           <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
             <div className="flex space-x-5">
               <a href="https://linkedin.com/in/rahulgoyal83789">
-                <FiLinkedin className='w-5 h-5 text-gray-300'/>
+                <FiLinkedin className='w-5 h-5 text-blue-500 dark:text-gray-300'/>
               </a>
               <a href="https://github.com/rahulgoyal83789">
-                <FiGithub className='w-5 h-5 text-gray-300'/>
+                <FiGithub className='w-5 h-5 text-gray-600 dark:text-gray-300'/>
               </a>
               <a href="https://instagram.com/rahulgoyal83789">
-                <FiInstagram className='w-5 h-5 text-gray-300'/>
+                <FiInstagram className='w-5 h-5 text-pink-500 dark:text-gray-300'/>
               </a>
               <a href="https://x.com/rahulgoyal83789">
-                <BsTwitterX className='w-5 h-5 text-gray-300'/>
+                <BsTwitterX className='w-5 h-5  text-gray-900 dark:text-gray-300'/>
               </a>
             </div>
             <button 
@@ -243,9 +243,9 @@ const Header = () => {
             }}
             className='bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-md p-6'>
               <div className='flex justify-between items-center mb-4'>
-                <h1 className='text-2xl font-bold text-gray-300'>Get In Touch</h1>
+                <h1 className='text-2xl font-bold text-gray-800 dark:text-gray-300'>Get In Touch</h1>
                 <button onClick={closeContactForm} aria-label="Close contact form">
-                  <FiX className='w-5 h-5 text-gray-300'/>
+                  <FiX className='w-5 h-5 text-gray-800 dark:text-gray-300'/>
                 </button>
               </div>
 
@@ -253,7 +253,7 @@ const Header = () => {
               {formStatus === "success" ? (
                 <div className='py-8 text-center'>
                   <p className='text-2xl mb-2'>🎉</p>
-                  <p className='text-gray-300 font-semibold text-lg'>Message sent!</p>
+                  <p className='text-gray-800 dark:text-gray-300 font-semibold text-lg'>Message sent!</p>
                   <p className='text-gray-400 text-sm mt-1'>I'll get back to you as soon as possible.</p>
                   <button
                     onClick={closeContactForm}
@@ -264,37 +264,37 @@ const Header = () => {
               ) : (
                 <form className='space-y-4' onSubmit={handleSubmit} noValidate>
                   <div>
-                    <label htmlFor="name" className='block text-sm font-medium text-gray-300 mb-1'>Name</label>
+                    <label htmlFor="name" className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>Name</label>
                     <input
                       type="text"
                       id="name"
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className='w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700 text-white placeholder-gray-400'
+                      className='w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400'
                       placeholder='Your Name'
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className='block text-sm font-medium text-gray-300 mb-1'>Email</label>
+                    <label htmlFor="email" className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>Email</label>
                     <input
                       type="email"
                       id="email"
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className='w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700 text-white placeholder-gray-400'
+                      className='w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400'
                       placeholder='your@email.com'
                     />
                   </div>
                   <div>
-                    <label htmlFor="message" className='block text-sm font-medium text-gray-300 mb-1'>Message</label>
+                    <label htmlFor="message" className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>Message</label>
                     <textarea
                       id="message"
                       required
                       value={formData.message}
                       onChange={handleChange}
-                      className='w-full px-4 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-700 text-white placeholder-gray-400'
+                      className='w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400'
                       placeholder='What would you like to discuss?'
                       rows="4"
                     />
