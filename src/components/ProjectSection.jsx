@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SlShareAlt } from "react-icons/sl";
 
 const projectImages = [
-    { id: 1, title: "Nestique - Property Rental Platform",              imageSrc: "/images/Nestique_image.png",     link: "https://nestique.onrender.com/" },
+    { id: 1, title: "Nestique - Property Rental Platform",              imageSrc: "/images/Nestique_image.png",     link: "https://nestique-y4hy.onrender.com/" },
     { id: 2, title: "BrainDrift - AI-Powered Interview Prep Platform",  imageSrc: "/images/Braindrift_image.png",   link: "https://braindrift.vercel.app/" },
     { id: 3, title: "MergeConflict - Live Code Collaboration Tool",     imageSrc: "/images/MergeConflict_image.png",link: "https://github.com/rahulgoyal83789/mergeconflict" },
     { id: 4, title: "CloudJar - React based basic weather app",         imageSrc: "/images/CloudJar_image.png",     link: "https://cloudjar.vercel.app/" },
